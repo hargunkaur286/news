@@ -30,7 +30,7 @@ function Navbar() {
     
     </div>
 
-    <div  onClick={handleNav}  className={ nav ? 'absolute left-0 text-black top-0 h-screen max-h-96 w-full bg-gray-100/90 px-4 py-7 flex justify-between	 flex-col ' :  'absolute left-[-100%] h-full w-full bg-gray-100/90 px-4 py-7 flex flex-col'}>
+    <div  onClick={handleNav}  className={ nav ? 'absolute left-0 text-black top-0 h-screen w-full bg-gray-100/90 px-4 py-7 flex justify-evenly	 flex-col ' :  'absolute left-[-100%] h-full w-full bg-gray-100/90 px-4 py-7 flex flex-col'}>
     <ul className=' h-full contents'>
        
         <li className="border-b" >Home</li>
