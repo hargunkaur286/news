@@ -2,17 +2,23 @@ import React, { useEffect, useState } from 'react'
 // import {BsPerson} from 'react-icons/bs'
 import {AiOutlineClose} from 'react-icons/ai'
 import {HiOutlineMenuAlt4} from 'react-icons/hi'
-import Card from './Card';
-
+import {BsFillMoonFill, BsFillSunFill} from 'react-icons/bs';
 
 function Navbar() {
 
 
-    const [nav,setNav] = useState(false);
 
+    const [nav,setNav] = useState(false);
     const handleNav = () => {
         setNav(!nav);
     }
+
+
+    const [theme,setTheme] = useState(false);
+    const handleTheme = () => {
+      setTheme(!theme);
+    }
+
 
 
   
@@ -35,20 +41,26 @@ function Navbar() {
       // .then((data) =>{ console.log(data.articles);});
       const response = await fetch(req);
       const data = await response.json();
-      console.log(data.articles);
+      // console.log(data.articles);
       setData(data.articles);
-      data.articles.map( (n) =>  { console.log(n.author);  })
-    
+      // data.articles.map( (n) =>  { console.log(n.author);  })
+
+      localStorage.setItem('cardData',JSON.stringify(data.articles));    
+
     }
     
-    console.log(data);
-    useEffect( () => { fetchData('general')},[])
+    // console.log(data);
+
+    useEffect( () => { 
+      fetchData('general');  
+    } ,[])
 
 
 
 
   return (
-    <div className=' flex justify-between items-center h-20 w-full  absolute z-10 text-white px-8 bg-black '> 
+    <div className= { theme ? ' flex justify-between items-center h-20 w-full  absolute z-10  text-black px-8 bg-none ' :' flex justify-between items-center h-20 w-full  absolute z-10 text-white px-8 bg-black  '} > 
+
     <ul className='hidden md:flex w-full m-auto justify-evenly lg:w-7/12  2xl:w-6/12'>
         <li onClick={ () => {fetchData('general');}}   >Home </li>
         <li onClick={ () => {fetchData('technology');}}   >Tech </li>
@@ -59,6 +71,12 @@ function Navbar() {
         <li onClick={ () => {fetchData('entertainment');}}   > Entertainment</li>
     </ul>
     
+    <div>
+    <button onClick={ () => {handleTheme() } } className={theme ? 'hidden' : 'flex md:px-14'} ><BsFillMoonFill/></button>
+    <button onClick={ () => {handleTheme() } }  className={theme ? 'flex md:px-14'  : 'hidden' }><BsFillSunFill/></button>
+
+    </div>
+
 {/* 
     { 
       /// "?." is used as NULL checker in js.
